@@ -10,7 +10,8 @@
     <script>
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Gasoek+One&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Gasoek+One&display=swap');/*팀 제목 폰트*/
+        @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');/*팀 소개 폰트트*/
 
         .movePanel {
             background-color: black;
@@ -42,13 +43,19 @@
         .teamIntroduce_TextArea {
             width: 800px;
             height: 700px;
+            position: relative;
 
-            background-color: green;
             float: left;
         }
 
         .teamIntroduce_Text {
-            margin: 50px auto auto auto;
+            font-family: "Jua", serif;
+            font-size: 30px;
+
+            position: absolute;
+            top: 50%;
+            margin-top: -100px;
+
             word-break: break-all;
             /*글이 구역을 벗어나게 되면 줄바꿈을 한다.*/
         }

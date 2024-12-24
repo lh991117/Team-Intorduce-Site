@@ -10,10 +10,8 @@
     <script>
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Gasoek+One&display=swap');
-        /*팀 제목 폰트*/
-        @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
-        /*팀 소개 폰트트*/
+        @import url('https://fonts.googleapis.com/css2?family=Gasoek+One&display=swap');/*팀 제목 폰트*/
+        @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');/*팀 소개 폰트트*/
 
         .movePanel {
             background-color: black;
@@ -21,7 +19,7 @@
             height: 50px;
         }
 
-        .text-end {
+        .text-end{
             margin: auto;
         }
 
@@ -30,23 +28,10 @@
             font-size: 100px;
 
             height: 650px;
-        }
 
-        /* 이미지 해상도 올렸습니다 */
-        .mainTitle img {
-            width: 100%;
-            height: 100%;
-        }
-
-        /* 영스택 개발자 글씨 위치 조정입니다. */
-        .mainTitle .textBox {
-            width: 100%;
-            position: absolute;
-            top: 30%;
-            left: 25%;
-            transform: translate(-24%,
-                    -124%);
-            /*이미지 위치조정 이걸로 하시면 되용*/
+            background-image: url('https://i.namu.wiki/i/5xIq2a_--rtxVW_b3ofMxH07WjEs22Z5i501fg-3zHYDjOvKGmC3LY4yq28Oi43kw-bFUAOwkXpeVKC4TyqCA2_gc95KTxPmP8mK65B5NONKAmPKC4jwoo1jJOUJ1o2acJ00Yr5zP1dHdQSz85THfA.webp');
+            background-position: center;
+            background-size: cover;
         }
 
         .teamIntroduce {
@@ -104,6 +89,7 @@
             width: 200px;
             height: 100px;
         }
+
     </style>
 </head>
 
@@ -112,17 +98,14 @@
         <div class="btn_container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <div class="text-end">
-                    <button type="button" onclick="location.href='teamWebSite.html'"
-                        class="btn btn-success">Main</button>
-                    <button type="button" onclick="location.href='Guestbook.html'" class="btn btn-light">Guest
-                        Book</button>
+                    <button type="button" onclick="location.href='teamWebSite.html'" class="btn btn-success">Main</button>
+                    <button type="button" onclick="location.href='Guestbook.html'"class="btn btn-light">Guest Book</button>
                 </div>
             </div>
         </div>
     </header>
     <header>
         <div class="mainTitle">
-            <img src="Img/useThis2.jpg" alt="" />
             <p1>영스텍 개발자</p1>
         </div>
     </header>

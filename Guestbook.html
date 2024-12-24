@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>방명록</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        .guestbook-header {
+            background-color: white;
+            margin: 20px auto 20px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+
+    </script>
+
+    <script type="module">
+
+        // Firebase SDK 라이브러리 가져오기
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { Timestamp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { query, orderBy } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyCEulZ4bqiTVILunJHAgADNQ7WAFUwPp4U",
+            authDomain: "sparta-328c9.firebaseapp.com",
+            projectId: "sparta-328c9",
+            storageBucket: "sparta-328c9.firebasestorage.app",
+            messagingSenderId: "929744761263",
+            appId: "1:929744761263:web:e6216bf9747604eecebf5a",
+            measurementId: "G-60ZRD5JTZF"
+        };
+
+        // Firebase 인스턴스 초기화
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+
+        $("#postingbtn").click(async function () {
+            let guestbookNickname = $('#guestbook-nickname').val();
+            let guestbookText = $('#guestbook-text').val();
+
+            // 현재 시간을 KST로 변환
+            const now = new Date();
+            const kstOffset = 9 * 60; // KST는 UTC+9
+            const utcDate = now.getTime() + (now.getTimezoneOffset() * 60000); // UTC 시간
+            const kstDate = new Date(utcDate + (kstOffset * 60000)); // KST 시간
+            
+            // Firestore Timestamp로 변환
+            let date = Timestamp.fromDate(kstDate);
+
+            let doc = {
+                'guest-nickname': guestbookNickname,
+                'guest-text': guestbookText,
+                'date': date
+            };
+            await addDoc(collection(db, "guestbook"), doc);
+            alert('등록완료!');
+            window.location.reload();
+        });
+
+        let q = query(collection(db, "guestbook"), orderBy("date", "asc")); // "desc"는 내림차순 정렬. 오름차순은 "asc"
+        let docs = await getDocs(q);
+        
+        docs.forEach((doc) => {
+            let row = doc.data();
+
+            let guestNickname = row['guest-nickname']
+            let guestText = row['guest-text']
+            let date = row['date']
+
+            function formatDate(date) {
+                return date.toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' });
+            }
+            // Timestamp를 Date 객체로 변환 후 포맷팅
+            let formattedDate = formatDate(date.toDate());
+
+            let temp_html = `
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <p>${guestNickname}</p>
+                </div>
+                <div class="col-md-7">
+                    <p>${guestText}</p>
+                </div>
+                <div class="col-md-2">
+                    <p>${formattedDate}</p>
+                </div>
+            </div>
+        </div>`;
+
+            $('#guestbook').append(temp_html);
+        });
+
+    </script>
+
+    <h1 class="guestbook-header">방명록</h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <input type="text" class="form-control" placeholder="닉네임" id="guestbook-nickname">
+            </div>
+            <div class="col-md-7">
+                <input type="text" class="form-control" placeholder="남길글" id="guestbook-text">
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn-dark" style="width: 100%; height: 100%; border-radius: 5px;"id="postingbtn">등록</button>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+</head>
+
+<body>
+    <div id="guestbook">
+
+    </div>
+</body>
+
+</html>`

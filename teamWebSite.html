@@ -13,13 +13,13 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Gasoek+One&display=swap');
 
-        .movePanel{
+        .movePanel {
             background-color: black;
 
             height: 50px;
         }
 
-        .text-end{
+        .text-end {
             margin-top: 5px;
         }
 
@@ -36,23 +36,32 @@
 
         .teamIntroduce {
             width: 1200px;
-            height: 500px;
+            height: 700px;
             margin: 0px auto 0px auto;
         }
 
-        .teamIntroduce_Text{
+        .teamIntroduce_TextArea {
             width: 800px;
-            height: 500px;
+            height: 700px;
 
             background-color: green;
             float: left;
         }
 
-        .teamIntroduce_Img{
+        .teamIntroduce_Text {
+            margin: 50px auto auto auto;
+            word-break: break-all;
+            /*글이 구역을 벗어나게 되면 줄바꿈을 한다.*/
+        }
+
+        .teamIntroduce_Img {
             width: 400px;
-            height: 500px;
+            height: 700px;
 
             background-color: blue;
+            background-image: url(https://img-musesai.163264.com/pic/202407/7pz2TftKccTH.jpg);
+            background-position: center;
+            background-size: cover;
             float: left;
         }
 
@@ -64,6 +73,7 @@
             object-fit: cover;
         }
 
+        /* 팀원 카드 */
         .mycards {
             width: 1200px;
             margin: 60px auto 20px auto;
@@ -95,8 +105,15 @@
     </header>
 
     <div class="teamIntroduce">
-        <div class="teamIntroduce_Text">
-            <p1>Stack이 0부터 FULL이 될 때까지 개발 기술들을 배워가는 팀입니다.</p1>
+        <div class="teamIntroduce_TextArea">
+            <div class="teamIntroduce_Text">
+                <p>Stack이 0부터 FULL이 될 때까지 개발 기술들을 배워가는 팀입니다.<br />
+                    비록 Java나 Spring에 관련된 기술이 부족하더라도<br />
+                    팀원끼리 서로 도우면서<br />
+                    스텍(Stack)을 점차 쌓아나가<br />
+                    모두가 FULL 스텍이 되기 위한 팀입니다.
+                </p>
+            </div>
         </div>
         <div class="teamIntroduce_Img"></div>
     </div>

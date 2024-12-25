@@ -19,8 +19,32 @@
             align-items: center;
         }
 
+        .container {
+            margin-bottom: 30px;
+        }
+
         .text-end {
             margin: auto;
+        }
+
+        .text_box {
+            flex: 0 0 auto;
+            width: 50%;
+        }
+
+        .date_box {
+            flex: 0 0 auto;
+            width: 24%;
+        }
+
+        .delete_box {
+            text-align: right;
+        }
+
+        .delete_box>button {
+            border: 1px solid red;
+            border-radius: 5px;
+            background-color: transparent;
         }
     </style>
 
@@ -31,7 +55,7 @@
         // Firebase SDK 라이브러리 가져오기
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
         import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-        import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { collection, addDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
         import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
         import { Timestamp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
         import { query, orderBy } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
@@ -92,21 +116,35 @@
             let formattedDate = formatDate(date.toDate());
 
             let temp_html = `
-        <div class="container">
+        <div class="container" id="${doc.id}">
             <div class="row">
                 <div class="col-md-3">
                     <p>${guestNickname}</p>
                 </div>
-                <div class="col-md-7">
+                <div class="text_box">
                     <p>${guestText}</p>
                 </div>
-                <div class="col-md-2">
+                <div class="date_box">
                     <p>${formattedDate}</p>
+                </div>
+                <div class="delete_box">
+                    <button class="delete_btn" data-id="${doc.id}">삭제</button>    
                 </div>
             </div>
         </div>`;
 
             $('#guestbook').append(temp_html);
+        });
+
+        // 삭제 버튼 클릭 시 처리
+        $(document).on('click', '.delete_btn', async function () {
+            const docId = $(this).data('id'); // 삭제하려는 항목의 Firebase Document ID
+
+            // Firebase에서 삭제
+            await deleteDoc(doc(db, "guestbook", docId));
+            // 화면에서 해당 항목 삭제
+            $(`#${docId}`).remove();
+            alert('삭제되었습니다!');
         });
 
     </script>

@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <title>자기소개</title>
 </head>
 <style>
@@ -69,101 +70,81 @@
   }
 </style>
 <script type="module">
+  // URL에서 keyname 가져오기
   let keyname = location.href.split('?')[1];
-  const personString = window.localStorage.getItem(keyname);
-  const person = JSON.parse(personString);
-  console.log(decodeURI(keyname));
-  let tmep_html = `
+
+  // LocalStorage에서 person 데이터 가져오기
+  const person = JSON.parse(localStorage.getItem(keyname));
+  console.log("Keyname:", decodeURI(keyname));
+  console.log("Person Data:", person); //제대로 받아왔는지 확인
+
+  // fields 데이터 추출
+  const fields = person?._document?.data?.value?.mapValue?.fields || {}; //있는 field 데이터들만 추출
+  console.log("Fields:", fields);
+
+  // 각 필드 값 추출 - 없는 경우 임의의 값 넣기
+  const myname = fields.teamwonName?.stringValue || "이름 없음";
+  const mymbti = fields.myMBTI?.stringValue || "MBTI 없음";
+  const myBlog = fields.myBlog?.stringValue || "#";
+  const myHobby = fields.myHobby?.stringValue || "취미 없음";
+  const myImg = fields.myImg?.stringValue || "https://via.placeholder.com/150";
+  const myResolution = fields.myResolution?.stringValue || "다짐 없음";
+
+  // 추출한 값 삽입
+  let temp_html = `
   <header>
-      <h1>${person.value(teamwonName)}</h1>
+      <h1>${myname}</h1>
     </header>
     <div class="box">
       <div class="introduce">
         <tr>
           <td>
             <h1>MBTI</h1>
-            <h4>${person.value(myMBTI)}</h4>
+            <h4>${mymbti}</h4>
           </td>
           <td>
             <h1>
               블로그
-              <a href="${person.value(myBlog)}" target="_blank">
+              <a href="${myBlog}" target="_blank">
                 여길 누르면 이동 <br />
               </a>
             </h1>
             <h4>
-              
             </h4>
           </td>
           <td>
             <h1>취미</h1>
             <h4>
-              ${person.value(myHobby)}
+              ${myHobby}
             </h4>
           </td>
           <td>
             <h1>개인 다짐</h1>
             <h4>
-              ${person.value(myResolution)}
+              ${myResolution}
             </h4>
           </td>
         </tr>
       </div>
       <div class="picture">
         <img src =
-        '${person.value(myImg)}'>
+        '${myImg}'>
       </div>
       <footer>
         <button onClick="location.href='teamWebSite.html'">돌아가기</button>
       </footer>
-    </div>`
-    $("#profile").append(temp_html);
+    </div>`;
 
+  // 프로필 영역에 HTML 삽입
+  document.getElementById("profile").innerHTML = temp_html;
 </script>
 
 <body>
-  <div id = "profile">
+  <div id="profile">
+    <!-- 로딩 중 기본 내용 -->
     <header>
-      <h1>이름</h1>
+      <h1>로딩 중...</h1>
     </header>
-    <div class="box">
-      <div class="introduce">
-        <tr>
-          <td>
-            <h1>MBTI</h1>
-            <h4></h4>
-          </td>
-          <td>
-            <h1>
-              블로그
-              <a href="teamWebSite.html" target="_blank">
-                여길 누르면 이동 <br />
-              </a>
-            </h1>
-            <h4>
-            </h4>
-          </td>
-          <td>
-            <h1>취미</h1>
-            <h4>
-
-            </h4>
-          </td>
-          <td>
-            <h1>개인 다짐</h1>
-            <h4>
-
-            </h4>
-          </td>
-        </tr>
-      </div>
-      <div class="picture">
-        <img src="Img/profile_ksy.jpg">
-      </div>
-      <footer>
-        <button onClick="location.href='teamWebSite.html'">돌아가기</button>
-      </footer>
-    </div>
   </div>
 </body>
 

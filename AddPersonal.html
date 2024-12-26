@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>자기소개</title>
+</head>
+<style>
+  body {
+    padding: 5%;
+  }
+
+  header {
+    width: 30%;
+    background-color: lightblue;
+    text-align: center;
+    margin-bottom: 3%;
+  }
+
+  div.box {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  div.introduce {
+    width: 40%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgb(248, 249, 250);
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif;
+    padding: 3%;
+  }
+
+  div.picture {
+    width: 40%;
+    height: 100%;
+    background-color: antiquewhite;
+  }
+
+  div.picture img {
+    object-fit: cover;
+    width: 100%;
+  }
+
+  div.introduce a {
+    text-decoration-line: none;
+    color: #999;
+  }
+
+  footer {
+    width: 100%;
+    background-color: bisque;
+  }
+
+  footer button {
+    padding: 1%;
+    position: absolute;
+    right: 50%;
+    bottom: -10%;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+  }
+</style>
+<script type="module">
+  let keyname = location.href.split('?')[1];
+  const personString = window.localStorage.getItem(keyname);
+  const person = JSON.parse(personString);
+  console.log(decodeURI(keyname));
+  let tmep_html = `
+  <header>
+      <h1>${person.value(teamwonName)}</h1>
+    </header>
+    <div class="box">
+      <div class="introduce">
+        <tr>
+          <td>
+            <h1>MBTI</h1>
+            <h4>${person.value(myMBTI)}</h4>
+          </td>
+          <td>
+            <h1>
+              블로그
+              <a href="${person.value(myBlog)}" target="_blank">
+                여길 누르면 이동 <br />
+              </a>
+            </h1>
+            <h4>
+              
+            </h4>
+          </td>
+          <td>
+            <h1>취미</h1>
+            <h4>
+              ${person.value(myHobby)}
+            </h4>
+          </td>
+          <td>
+            <h1>개인 다짐</h1>
+            <h4>
+              ${person.value(myResolution)}
+            </h4>
+          </td>
+        </tr>
+      </div>
+      <div class="picture">
+        <img src =
+        '${person.value(myImg)}'>
+      </div>
+      <footer>
+        <button onClick="location.href='teamWebSite.html'">돌아가기</button>
+      </footer>
+    </div>`
+    $("#profile").append(temp_html);
+
+</script>
+
+<body>
+  <div id = "profile">
+    <header>
+      <h1>이름</h1>
+    </header>
+    <div class="box">
+      <div class="introduce">
+        <tr>
+          <td>
+            <h1>MBTI</h1>
+            <h4></h4>
+          </td>
+          <td>
+            <h1>
+              블로그
+              <a href="teamWebSite.html" target="_blank">
+                여길 누르면 이동 <br />
+              </a>
+            </h1>
+            <h4>
+            </h4>
+          </td>
+          <td>
+            <h1>취미</h1>
+            <h4>
+
+            </h4>
+          </td>
+          <td>
+            <h1>개인 다짐</h1>
+            <h4>
+
+            </h4>
+          </td>
+        </tr>
+      </div>
+      <div class="picture">
+        <img src="Img/profile_ksy.jpg">
+      </div>
+      <footer>
+        <button onClick="location.href='teamWebSite.html'">돌아가기</button>
+      </footer>
+    </div>
+  </div>
+</body>
+
+</html>

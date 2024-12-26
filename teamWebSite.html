@@ -200,7 +200,8 @@
                 </div>
             </div>
             `;
-
+        let docString = JSON.stringfy(doc);
+        window.localStorage.setItem(teamwonName,docString);
         $("#card").append(temp_html);
       });
     </script>
@@ -329,7 +330,7 @@
           <div class="card">
             <a href="Personal2.html">
                 <img
-                src="Team-Intorduce-Site/Img/KakaoTalk_20241224_133047378.jpg"
+                src="Img/KakaoTalk_20241224_133047378.jpg"
               />
               <div class="card-body">
                 <h5 class="card-title">백승민</h5>

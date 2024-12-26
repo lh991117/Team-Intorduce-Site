@@ -200,7 +200,8 @@
                 </div>
             </div>
             `;
-
+        let docString = JSON.stringfy(doc);
+        window.localStorage.setItem(teamwonName,docString);
         $("#card").append(temp_html);
       });
     </script>
